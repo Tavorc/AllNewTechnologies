@@ -58,8 +58,8 @@ fun PhotoFeedScreen(
     }
 
     LaunchedEffect(shouldLoadMore.value) {
-        if (shouldLoadMore.value && !viewModel.isLoading && viewModel.hasMore) {
-            viewModel.getPhotosList()
+        if (shouldLoadMore.value && !viewModel.isLoading ) {
+            viewModel.getPhotosList(true)
         }
     }
 

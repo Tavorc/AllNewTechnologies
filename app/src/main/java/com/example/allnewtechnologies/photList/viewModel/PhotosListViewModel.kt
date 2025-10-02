@@ -12,7 +12,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 import javax.inject.Inject
@@ -35,19 +34,19 @@ class PhotosListViewModel @Inject constructor(private val photosListApiControlle
     var photoList = mutableListOf<Hit>()
 
     init {
-        getPhotosList()
+        getPhotosList(false)
     }
 
-    fun getPhotosList() {
+    fun getPhotosList(isPagination: Boolean) {
         if (isLoading || !hasMore) return
         isLoading = true
-        page++
+        if(isPagination || page == 0) page++
         if (page == 1) {
             _uiState.value = PhotosListViewState.Loading
         }
         job = viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = photosListApiController.getPhotosList(page, PER_PAGE)
+                val response = photosListApiController.getPhotosList(page, PER_PAGE, isPagination)
                 if (response.isSuccessful) {
                     val newHits = response.body()?.hits ?: emptyList()
                     if (page == 1) {
@@ -58,7 +57,7 @@ class PhotosListViewModel @Inject constructor(private val photosListApiControlle
                     }
                     photoList.addAll(newHits)
                     // If less than PER_PAGE, no more data
-                    hasMore = newHits.size == PER_PAGE
+//                    hasMore = newHits.size == PER_PAGE
                 } else {
                     _uiState.value = PhotosListViewState.Error(response.message())
                     hasMore = false
@@ -74,11 +73,11 @@ class PhotosListViewModel @Inject constructor(private val photosListApiControlle
 
     private fun getTwoPages() {
         val page1 = viewModelScope.async(Dispatchers.IO) {
-            photosListApiController.getPhotosList(1, PER_PAGE)
+            photosListApiController.getPhotosList(1, PER_PAGE, false)
         }
 
         val page2 = viewModelScope.async(Dispatchers.IO) {
-            photosListApiController.getPhotosList(2, PER_PAGE)
+            photosListApiController.getPhotosList(2, PER_PAGE, false)
         }
 
         viewModelScope.launch {
