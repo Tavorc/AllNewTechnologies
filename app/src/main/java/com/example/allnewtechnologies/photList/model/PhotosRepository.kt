@@ -13,7 +13,7 @@ class PhotosRepository @Inject constructor(private val apiService: PhotosApi,
         val photos = apiService.getPhotosList(
             PhotosApi.API_KEY, "yellow+flowers", "photo", page, perPage
         )
-//        localDataSource.saveData(photos.body()?.hits ?: emptyList())
+        localDataSource.saveData(photos.body()?.hits ?: emptyList())
         return photos
     }
 }
