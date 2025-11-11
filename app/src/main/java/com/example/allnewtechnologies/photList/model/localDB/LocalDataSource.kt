@@ -1,6 +1,6 @@
 package com.example.allnewtechnologies.photList.model.localDB
 
-import com.example.allnewtechnologies.photList.model.Hit
+import com.example.allnewtechnologies.photList.model.responses.Hit
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(

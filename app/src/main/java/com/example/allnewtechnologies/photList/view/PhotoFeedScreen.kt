@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -33,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.example.allnewtechnologies.R
-import com.example.allnewtechnologies.photList.model.Hit
+import com.example.allnewtechnologies.photList.model.responses.Hit
 import com.example.allnewtechnologies.photList.viewModel.PhotosListViewModel
 import com.example.allnewtechnologies.photList.viewModel.PhotosListViewState
 

@@ -1,6 +1,7 @@
 package com.example.allnewtechnologies.photList.model
 
 import com.example.allnewtechnologies.photList.model.localDB.LocalDataSourceInt
+import com.example.allnewtechnologies.photList.model.responses.PhotoResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -22,8 +23,13 @@ class PhotosRepository @Inject constructor(
             )
             localDataSource.saveData(photos.body()?.hits ?: emptyList())
         } else {
-
-            photos = Response.success(PhotoResponse(0, localPhotos.size, localPhotos.toMutableList()))
+            photos = Response.success(
+                PhotoResponse(
+                    0,
+                    localPhotos.size,
+                    localPhotos.toMutableList()
+                )
+            )
         }
         return photos
     }

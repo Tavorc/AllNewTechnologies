@@ -1,5 +1,6 @@
 package com.example.allnewtechnologies.photList.model
 
+import com.example.allnewtechnologies.photList.model.responses.PhotoResponse
 import retrofit2.Response
 
 interface PhotosRepositoryInterface {

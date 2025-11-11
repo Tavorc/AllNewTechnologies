@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.allnewtechnologies.photList.view.PhotoFeedScreen
 import com.example.allnewtechnologies.photList.view.PhotoScreen
+import com.example.allnewtechnologies.photList.view.Screen
 import com.example.allnewtechnologies.photList.viewModel.PhotosListViewModel
 
 @Composable

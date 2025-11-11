@@ -2,7 +2,7 @@ package com.example.allnewtechnologies.photList.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.allnewtechnologies.photList.model.Hit
+import com.example.allnewtechnologies.photList.model.responses.Hit
 import com.example.allnewtechnologies.photList.model.PhotosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -56,8 +56,6 @@ class PhotosListViewModel @Inject constructor(private val photosListApiControlle
                         _uiState.value = PhotosListViewState.Success((currentHits + newHits).toMutableList())
                     }
                     photoList.addAll(newHits)
-                    // If less than PER_PAGE, no more data
-//                    hasMore = newHits.size == PER_PAGE
                 } else {
                     _uiState.value = PhotosListViewState.Error(response.message())
                     hasMore = false

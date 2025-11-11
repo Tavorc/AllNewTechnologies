@@ -1,6 +1,5 @@
 package com.example.allnewtechnologies.networking
 
-import com.example.allnewtechnologies.PhotoApi
 import com.example.allnewtechnologies.photList.model.PhotosApi
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -48,10 +47,4 @@ object NetworkModule {
     @Provides
     fun photosApiService(retrofit: Retrofit): PhotosApi =
         retrofit.create(PhotosApi::class.java)
-
-    @Singleton
-    @Provides
-    fun photoApiService(retrofit: Retrofit): PhotoApi =
-        retrofit.create(PhotoApi::class.java)
-
 }

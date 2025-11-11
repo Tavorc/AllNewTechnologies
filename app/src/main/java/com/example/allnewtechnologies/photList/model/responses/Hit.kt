@@ -1,4 +1,4 @@
-package com.example.allnewtechnologies.photList.model
+package com.example.allnewtechnologies.photList.model.responses
 
 import android.os.Parcel
 import android.os.Parcelable

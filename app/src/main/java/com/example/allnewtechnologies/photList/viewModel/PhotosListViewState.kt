@@ -1,7 +1,6 @@
 package com.example.allnewtechnologies.photList.viewModel
 
-import com.example.allnewtechnologies.photList.model.Hit
-import com.example.allnewtechnologies.photList.model.PhotoResponse
+import com.example.allnewtechnologies.photList.model.responses.Hit
 
 
 sealed class PhotosListViewState {

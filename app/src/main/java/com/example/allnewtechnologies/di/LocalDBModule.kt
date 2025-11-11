@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataSourceModule {
+object LocalDBModule {
 
     @Provides
     fun provideLocalDataSource(hitDao: HitDao): LocalDataSourceInt {

@@ -3,7 +3,7 @@ package com.example.allnewtechnologies.photList.model.localDB
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.example.allnewtechnologies.photList.model.Hit
+import com.example.allnewtechnologies.photList.model.responses.Hit
 
 @Dao
 interface HitDao {
