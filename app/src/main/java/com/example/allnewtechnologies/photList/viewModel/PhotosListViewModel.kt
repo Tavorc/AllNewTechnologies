@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import javax.inject.Inject
 
@@ -40,20 +41,24 @@ class PhotosListViewModel @Inject constructor(private val photosListApiControlle
     fun getPhotosList(isPagination: Boolean) {
         if (isLoading || !hasMore) return
         isLoading = true
-        if(isPagination || page == 0) page++
+        if (isPagination || page == 0) page++
         if (page == 1) {
             _uiState.value = PhotosListViewState.Loading
         }
-        job = viewModelScope.launch(Dispatchers.IO) {
+        job = viewModelScope.launch {
             try {
-                val response = photosListApiController.getPhotosList(page, PER_PAGE, isPagination)
+                val response = withContext(Dispatchers.IO) {
+                    photosListApiController.getPhotosList(page, PER_PAGE, isPagination)
+                }
                 if (response.isSuccessful) {
                     val newHits = response.body()?.hits ?: emptyList()
                     if (page == 1) {
                         _uiState.value = PhotosListViewState.Success(newHits.toMutableList())
                     } else {
-                        val currentHits = (_uiState.value as? PhotosListViewState.Success)?.response ?: emptyList()
-                        _uiState.value = PhotosListViewState.Success((currentHits + newHits).toMutableList())
+                        val currentHits = (_uiState.value as? PhotosListViewState.Success)?.response
+                            ?: emptyList()
+                        _uiState.value =
+                            PhotosListViewState.Success((currentHits + newHits).toMutableList())
                     }
                     photoList.addAll(newHits)
                 } else {
