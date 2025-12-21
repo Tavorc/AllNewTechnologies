@@ -1,15 +1,15 @@
-package com.example.allnewtechnologies.networking
+package com.example.allnewtechnologies.di
 
 import com.example.allnewtechnologies.photList.model.PhotosApi
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
-import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -37,7 +37,7 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(PhotosApi.URL)
+            .baseUrl(PhotosApi.Companion.URL)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .build()
